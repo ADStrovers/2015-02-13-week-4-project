@@ -1,9 +1,11 @@
 class Weapon
   
   def initailize
-    @dice = options["dice"]
+    @dice_size = options["dice_size"]
+    @dice_amount = options["dice_amount"]
     @speed = options["speed"]
-    @type = options["type"]
+    @crit_size = options["crit_size"]
+    @crit_range = options["crit_range"]
   end
   
 end
