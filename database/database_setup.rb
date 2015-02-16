@@ -10,10 +10,12 @@ DATABASE.execute("CREATE TABLE IF NOT EXISTS people
 DATABASE.execute("CREATE TABLE IF NOT EXISTS conventions
                   id INTEGER PRIMARY KEY,
                   name TEXT NOT NULL,
+                  address TEXT NOT NULL,
                   loc_lat NUMBER NOT NULL,
                   loc_lon NUMBER NOT NULL")
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS panels
                   id INTEGER PRIMARY KEY,
                   person_id INTEGER,
-                  convention_id INTEGER")
+                  convention_id INTEGER,
+                  alias TEXT")
