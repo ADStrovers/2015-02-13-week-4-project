@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <title>Week 4 Project</title>
+  </head>
+  <body>
+    <header>
+      <!-- White space -->
+    </header>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Create 
+          <% dropdown.each do |x| %>
+            <%= x %> 
+          <% end %></li>
+        <li>View
+          <% dropdown.each do |x| %>
+            <%= x %>
+          <% end %></li>
+        <li>Edit
+          <% dropdown.each do |x| %>
+            <%= x %>
+          <% end %></li>
+        <li>Delete
+          <% dropdown.each do |x| %>
+            <%= x %>
+          <% end %></li>
+      </ul>
+    </nav>
+    <div class="yielded"><%= yield %></div>
+  </body>
+
+</html>

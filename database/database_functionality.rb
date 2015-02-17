@@ -56,6 +56,8 @@ module DatabaseMethods
       end
       
       results_as_objects
+    end
+    
   end
   
   def self.included(base)
