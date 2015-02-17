@@ -2,17 +2,6 @@ module DatabaseMethods
   
   module DatabaseClassMethods
     
-    def requirements
-      attributes = []
-      instances_variables.each do |var|
-        unless var == :@id
-          attributes << var.to_s.delete('@')
-        end
-      end
-      
-      attributes
-    end
-    
     # Public: #delete
     # Deletes the given id from the class's database
     #
@@ -39,7 +28,13 @@ module DatabaseMethods
     # None
     
     def all
-      DATABASE.execute("SELECT * FROM #{self.class.to_s.pluralize}")
+      results = []
+      items = DATABASE.execute("SELECT * FROM #{self.to_s.pluralize}")
+      items.each do |item|
+        results << self.new(item)
+      end
+      
+      results
     end
     
     def search_for(field, value)
@@ -62,6 +57,17 @@ module DatabaseMethods
   
   def self.included(base)
     base.extend(DatabaseClassMethods)
+  end
+  
+  def requirements
+    attributes = []
+    instance_variables.each do |var|
+      unless var == :@id
+        attributes << var.to_s.delete('@')
+      end
+    end
+    
+    attributes
   end
   
   def insert

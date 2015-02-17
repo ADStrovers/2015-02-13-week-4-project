@@ -10,23 +10,19 @@
     </header>
     <nav>
       <ul>
-        <li>Home</li>
-        <li>Create 
-          <% dropdown.each do |x| %>
-            <%= x %> 
-          <% end %></li>
-        <li>View
-          <% dropdown.each do |x| %>
-            <%= x %>
-          <% end %></li>
-        <li>Edit
-          <% dropdown.each do |x| %>
-            <%= x %>
-          <% end %></li>
-        <li>Delete
-          <% dropdown.each do |x| %>
-            <%= x %>
-          <% end %></li>
+        <li><a href="/">Home</a></li>
+        <% dropdown("create").each do |x| %>
+          <%= x %> 
+        <% end %>
+        <% dropdown("view").each do |x| %>
+          <%= x %> 
+        <% end %>
+        <% dropdown("edit").each do |x| %>
+          <%= x %> 
+        <% end %>
+        <% dropdown("delete").each do |x| %>
+          <%= x %> 
+        <% end %>
       </ul>
     </nav>
     <div class="yielded"><%= yield %></div>

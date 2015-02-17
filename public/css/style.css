@@ -9,6 +9,12 @@ ul li:hover{
   color: #fff;
 }
 
+nav {
+  margin: auto;
+  text-align:center;
+  width: 100%;
+}
+
 ul {
   list-style-type: none;
   background: #98E393;
@@ -43,4 +49,13 @@ ul li:hover ul{
   opacity: 1;
   visibility: visible;
   color: #fff;
+}
+
+ul li ul li a {
+  color: #FFF;
+  text-decoration: none;
+}
+
+body {
+  text-align: center;
 }

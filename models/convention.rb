@@ -1,12 +1,17 @@
 class Convention
   include DatabaseMethods
-  include 
+  attr_accessor :name, :address, :latitude, :longitude, :id
   
   def initialize(options)
     @name = options["name"]
     @address = options["address"]
-    @latitude = options["loc_lat"]
-    @longitude = options["loc_lon"]
+  end
+  
+  def get_lat_and_long(address)
+    info = Geocoder.search("#{address}")
+    binding.pry
+    @latitude = info[0].latitude
+    @longitude = info[0].longitude
   end
   
 end
