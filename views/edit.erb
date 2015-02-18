@@ -1,0 +1,8 @@
+<div>
+  <form action="/save">
+    <% edit_output(@obj).each do |item| %>
+      <%= item %>
+    <% end %>
+    <p><button type="submit">Click Here to Make These Changes</button></p>
+  </form>
+</div>

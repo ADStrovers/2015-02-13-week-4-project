@@ -14,7 +14,7 @@ req_rel("database")
 req_rel("models")
 req_rel("helpers")
 
-helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper
+helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper, EditFormat
 
 before do
   if params[:type] == nil
@@ -29,7 +29,6 @@ before "/new" do
 end
 
 get "/" do
-  binding.pry
   erb :main
 end
 
@@ -60,7 +59,6 @@ get "/search_results" do
     redirect to("/search?#{params[:type]}")
   end
   @results = to_class(params[:type]).search_for("#{params[:field]}", params[:value])
-  binding.pry
   erb :search_results
 end
 
@@ -71,7 +69,16 @@ get "/view" do
 end
 
 get "/edit" do
+  @results = to_class(params[:type]).search_for("id", params[:id])
+  @obj = @results[0]
   erb :edit
+end
+
+get "/save" do
+  @obj = to_class(params[:type]).new(params)
+  @obj.save
+  query_string = request.query_string
+  redirect to("/view?#{query_string}")
 end
 
 get "/delete" do
