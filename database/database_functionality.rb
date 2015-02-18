@@ -41,9 +41,9 @@ module DatabaseMethods
       results_as_objects = []
       
       if value.is_a? Integer
-        results = DATABASE.execute("SELECT * FROM #{self.class.to_s.pluralize} WHERE #{field} = #{value}")
+        results = DATABASE.execute("SELECT * FROM #{self.to_s.pluralize} WHERE #{field} LIKE #{value}%")
       else
-        results = DATABASE.execute("SELECT * FROM #{self.class.to_s.pluralize} WHERE #{field} = '#{value}'")
+        results = DATABASE.execute("SELECT * FROM #{self.to_s.pluralize} WHERE #{field} LIKE '#{value}%'")
       end
       
       results.each do |item|
@@ -57,6 +57,15 @@ module DatabaseMethods
   
   def self.included(base)
     base.extend(DatabaseClassMethods)
+  end
+  
+  def requirements_with_id
+    attributes = []
+    instance_variables.each do |var|
+      attributes << var.to_s.delete('@')
+    end
+    
+    attributes
   end
   
   def requirements

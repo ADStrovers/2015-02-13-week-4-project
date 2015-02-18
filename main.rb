@@ -14,7 +14,7 @@ req_rel("database")
 req_rel("models")
 req_rel("helpers")
 
-helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat
+helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper
 
 before do
   if params[:type] == nil
@@ -22,12 +22,19 @@ before do
   end
 end
 
+before "/new" do 
+  if params[:correct] == "no"
+    request.path_info = "/create"
+  end
+end
+
 get "/" do
+  binding.pry
   erb :main
 end
 
 get "/create" do
-  @reqs = get_requirements(params[:type]) unless params[:type].nil?
+  @reqs = get_requirements(params[:type])
   @convention_list = Convention.all
   @person_list = Person.all
   @panel_list = Panel.all
@@ -35,24 +42,26 @@ get "/create" do
 end
 
 get "/new" do
-  # case params[:type]
-  # when "convention"
-  #   @obj = Convention.new(params)
-  #   @obj.get_lat_and_long(@obj.address)
-  # when "panel"
-  #   @obj = Panel.new(params)
-  # when "person"
-  #   @obj = Person.new(params)
-  # end
   @obj = to_class(params[:type]).new(params)
-  if params[:type] == "convention"
-    @obj.get_lat_and_long(@obj.address)
-  end
-  erb :confirm_add
+  @obj.insert
+  redirect_assist("view")
 end
 
 get "/search" do
+  unless params[:id] == nil
+    redirect_assist("view")
+  end
+  @reqs = get_requirements_with_id(params[:type])
   erb :search
+end
+
+get "/search_results" do
+  if params[:field].nil? || params[:value].nil?
+    redirect to("/search?#{params[:type]}")
+  end
+  @results = to_class(params[:type]).search_for("#{params[:field]}", params[:value])
+  binding.pry
+  erb :search_results
 end
 
 get "/view" do
@@ -69,6 +78,7 @@ get "/delete" do
   erb :delete
 end
 
-get "/confirm" do
-  erb :confirm
+get "/confirm_add" do
+  @obj = to_class(params[:type]).new(params)
+  erb :confirm_add
 end

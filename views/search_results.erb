@@ -1,0 +1,12 @@
+<div>
+  <p>Your results:</p>
+  <form action="/view">
+    <input type="hidden" name="type" value="<%= params[:type] %>">
+    <select name="id">
+      <% @results.each do |item| %>
+        <option value="<%= item.id %>"><%= item.name %><%= " - #{item.send(params[:field])}" unless params[:field] == "name" %></option>
+      <% end %>
+    </select>
+    <button type="submit">View More Info</button>
+  </form>
+</div>

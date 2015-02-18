@@ -1,0 +1,13 @@
+<div>
+  <p>Please select what you would like to search for:</p>
+  <form action="/search_results">
+    <input name="type" value="<%= params[:type] %>" hidden="true">
+    <select name="field" title="Select what you would like to search for:">
+      <% @reqs.each do |x| %>
+        <option value="<%= x %>"><%= x %></option>
+      <% end %>
+    </select>
+    <input name="value" type="text" title="Value:">
+    <button type="submit">Find!</button>
+  </form>
+</div>
