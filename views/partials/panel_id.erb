@@ -1,0 +1,8 @@
+<div>
+  <label for="<%= req %>"><%= req.capitalize.delete("_id") %></label>
+  <select>
+    <% @panel_list.each do |item| %>
+      <option value="<%= item.id %>"><%= item.name %></option>
+    <% end %>
+  </select>
+</div>

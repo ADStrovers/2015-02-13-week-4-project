@@ -1,31 +1,17 @@
 module FormCreate
   def create_form(requirements)
-    string_array = ["<input type=\"hidden\" name=\"type\" value=\"#{params[:type]}\""]
+    string_array = []
+    string_array << partial(:'/partials/hidden_type', :locals => { :type => params[:type] })
     requirements.each do |req|
       case req
       when "name", "address"
-        partial(:'/partials/name_address', :layout => false, :locals => { :req => req })
+        string_array << partial(:'/partials/name_address', :layout => false, :locals => { :req => req })
       when "panel_id"
-        string_array << "<div><label for=\"#{req}\">#{req.capitalize.delete("_id")}</label>"
-        string_array << "<select>"
-        @panel_list.each do |item|
-          string_array << "<option value=\"#{item.id}\">#{item.name}</option>"
-        end
-        string_array << "</select></div>"
+        string_array << partial(:'/partials/panel_id', :layout => false, :locals => { :req => req })
       when "person_id"
-        string_array << "<div><label for=\"#{req}\">#{req.capitalize.delete("_id")}</label>"
-        string_array << "<select>"
-        @person_list.each do |item|
-          string_array << "<option value=\"#{item.id}\">#{item.name}</option>"
-        end
-        string_array << "</select></div>"
+        string_array << partial(:'/partials/person_id', :layout => false, :locals => { :req => req })
       when "convention_id"
-        string_array << "<div><label for=\"#{req}\">#{req.capitalize.delete("_id")}</label>"
-        string_array << "<select>"
-        @convention_list.each do |item|
-          string_array << "<option value=\"#{item.id}\">#{item.name}</option>"
-        end
-        string_array << "</select></div>"
+        string_array << partial(:'/partials/convention_id', :layout => false, :locals => { :req => req })
       end
     end
     string_array << "<div><button type=\"submit\">Create New #{params[:type].capitalize}</button></div>"
