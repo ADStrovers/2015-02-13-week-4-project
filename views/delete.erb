@@ -1,0 +1,11 @@
+<div>
+  <form action="/confirm_delete">
+    <input type="text" name="type" hidden="true" value="<%= params[:type] %>">
+    <select name="id">
+      <% @results.each do |item| %>
+        <option value="<%= item.id %>"><%= item.name %></option>
+      <% end %>
+    </select>
+    <button type="submit">Click to Delete</button>
+  </form>
+</div>

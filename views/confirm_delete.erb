@@ -1,0 +1,9 @@
+<form action="/confirm_delete">
+  <% view_output(@obj).each do |item| %>
+    <%= item %>
+  <% end %>
+  <p>Does everything look correct?</p>
+  <input type="radio" name="correct" value="yes" checked>Yes<br>
+  <input type="radio" name="correct" value="no">No
+  <button type="submit">Submit</button>
+</form>

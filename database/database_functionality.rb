@@ -37,6 +37,19 @@ module DatabaseMethods
       results
     end
     
+    # Public: #search_for
+    # Return all rows that match the field and value passed in from the class' database as objects
+    #
+    # Parameters:
+    # field - String: name of the column to check
+    # value - String: the value to search within the given field for
+    #
+    # Returns:
+    # An array of objects.
+    #
+    # State Changes:
+    # None
+    
     def search_for(field, value)
       results_as_objects = []
       
@@ -55,9 +68,27 @@ module DatabaseMethods
     
   end
   
+  # Private (special): #self.included
+  # Autorun when included into a class and it autoextended the class methods within this module.
+  #
+  # Returns:
+  # nil
+  #
+  # State Changes:
+  # None
+  
   def self.included(base)
     base.extend(DatabaseClassMethods)
   end
+  
+  # Public: #requirements_with_id
+  # Returns all instance_variables of the object including "id"
+  #
+  # Returns:
+  # Array of all instance variables
+  #
+  # State Changes:
+  # None
   
   def requirements_with_id
     attributes = []
@@ -67,6 +98,15 @@ module DatabaseMethods
     
     attributes
   end
+  
+  # Public: #requirements
+  # Returns all instance_variables of the object without id
+  #
+  # Returns:
+  # Array of all instance variables except "id"
+  #
+  # State Changes:
+  # None
   
   def requirements
     attributes = []
@@ -78,6 +118,15 @@ module DatabaseMethods
     
     attributes
   end
+  
+  # Public: #insert
+  # Inserts the given object into the model's database and returns the "id" of the newly created object row.
+  #
+  # Returns:
+  # @id of the object.
+  #
+  # State Changes:
+  # None
   
   def insert
     attributes = []
@@ -101,6 +150,15 @@ module DatabaseMethods
     DATABASE.execute("INSERT INTO #{self.class.to_s.pluralize} (#{columns}) VALUES (#{values.join(', ')})")
     @id = DATABASE.last_insert_row_id
   end
+  
+  # Public: #save
+  # Saves the object into the models database.
+  # 
+  # Returns:
+  # An empty array.
+  #
+  # State Changes:
+  # None
   
   def save
     attributes = []

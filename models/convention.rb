@@ -9,10 +9,24 @@ class Convention
     get_lat_and_long(@address) unless @address == nil
   end
   
+  # Public: #get_lat_and_long
+  # Takes the given address and finds it's latitude and longitude using Geocoder
+  #
+  # Parameters:
+  # address - String: Address of the given location.
+  #
+  # Returns:
+  # @longitude
+  #
+  # State Changes:
+  # @latitude, @longitude
+  
   def get_lat_and_long(address)
     info = Geocoder.search("#{address}")
     @latitude = info[0].latitude
     @longitude = info[0].longitude
+    
+    @latitude, @longitude
   end
   
 end

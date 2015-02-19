@@ -22,6 +22,14 @@ before do
   end
 end
 
+['/view', "/edit"].each do |path|
+  before path do
+    @results = to_class(params[:type]).search_for("id", params[:id])
+  end
+end
+
+
+
 before "/new" do 
   if params[:correct] == "no"
     request.path_info = "/create"
@@ -63,13 +71,11 @@ get "/search_results" do
 end
 
 get "/view" do
-  @results = to_class(params[:type]).search_for("id", params[:id])
   @obj = @results[0]
   erb :view
 end
 
 get "/edit" do
-  @results = to_class(params[:type]).search_for("id", params[:id])
   @obj = @results[0]
   erb :edit
 end
@@ -82,10 +88,20 @@ get "/save" do
 end
 
 get "/delete" do
+  @results = to_class(params[:type]).all
   erb :delete
+end
+
+get "/confirm_delete" do
+  @obj = to_class(params[:type]).search_for("id", params[:id])[0]
+  erb :confirm_delete
 end
 
 get "/confirm_add" do
   @obj = to_class(params[:type]).new(params)
+  binding.pry
   erb :confirm_add
 end
+
+get "/remove" do
+  
