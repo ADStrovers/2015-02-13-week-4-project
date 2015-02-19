@@ -4,8 +4,7 @@ module FormCreate
     requirements.each do |req|
       case req
       when "name", "address"
-        string_array << "<div><label for=\"#{req}\">#{req.capitalize}</label>"
-        string_array << "<input type=\"text\" name=\"#{req}\"></div>"
+        partial(:'/partials/name_address', :layout => false, :locals => { :req => req })
       when "panel_id"
         string_array << "<div><label for=\"#{req}\">#{req.capitalize.delete("_id")}</label>"
         string_array << "<select>"

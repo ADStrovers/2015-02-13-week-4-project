@@ -26,7 +26,7 @@ class Convention
     @latitude = info[0].latitude
     @longitude = info[0].longitude
     
-    @latitude, @longitude
+    return @latitude, @longitude
   end
   
 end

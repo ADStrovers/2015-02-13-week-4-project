@@ -4,9 +4,12 @@ require 'sinatra'
 require 'rubygems'
 require 'active_support/inflector'
 require 'geocoder'
+require 'sinatra/partial'
 require_relative 'require_handler'
 
 include RequireHandler
+
+set :partial_template_engine, :erb
 
 DATABASE = SQLite3::Database.new("./database/convention_manager.db")
 
@@ -104,4 +107,6 @@ get "/confirm_add" do
 end
 
 get "/remove" do
+  
+end
   

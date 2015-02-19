@@ -3,9 +3,7 @@ DATABASE.results_as_hash = true
 
 DATABASE.execute("CREATE TABLE IF NOT EXISTS people
                   (id INTEGER PRIMARY KEY,
-                  name TEXT NOT NULL CHECK(name!=''),
-                  convention_id INTEGER,
-                  panel_id INTEGER)")
+                  name TEXT NOT NULL CHECK(name!=''))")
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS conventions
                   (id INTEGER PRIMARY KEY,
@@ -16,7 +14,7 @@ DATABASE.execute("CREATE TABLE IF NOT EXISTS conventions
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS panels
                   (id INTEGER PRIMARY KEY,
-                  person_id INTEGER,
+                  name TEXT NOT NULL CHECK(name!=''),
                   convention_id INTEGER NOT NULL)")
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS panels_people
