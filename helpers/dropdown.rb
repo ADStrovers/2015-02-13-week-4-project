@@ -4,7 +4,6 @@ module Dropdown
             "<ul class=\"dropdown_menu\">",
             "<li><a href=\"/#{menu}?type=convention\">Convention</a></li>", 
             "<li><a href=\"/#{menu}?type=panel\">Panel</a></li>", 
-            "<li><a href=\"/#{menu}?type=person\">Person</a></li>", 
             "</ul></li>"]
   end
 end

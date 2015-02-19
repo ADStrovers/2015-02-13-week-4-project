@@ -3,12 +3,15 @@ DATABASE.results_as_hash = true
 
 DATABASE.execute("CREATE TABLE IF NOT EXISTS people
                   (id INTEGER PRIMARY KEY,
+                  password INTEGER NOT NULL,
+                  username TEXT UNIQUE,
                   name TEXT NOT NULL CHECK(name!=''))")
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS conventions
                   (id INTEGER PRIMARY KEY,
                   name TEXT UNIQUE NOT NULL CHECK(name!=''),
                   address TEXT NOT NULL CHECK(address!=''),
+                  creator_id INTEGER NOT NULL,
                   latitude TEXT NOT NULL,
                   longitude TEXT NOT NULL)")
                   

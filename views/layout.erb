@@ -11,14 +11,23 @@
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        <% dropdown("create").each do |x| %>
-          <%= x %> 
+        <% unless session[:user] == nil %>
+          <% dropdown("create").each do |x| %>
+            <%= x %> 
+          <% end %>
         <% end %>
         <% dropdown("search").each do |x| %>
           <%= x %> 
         <% end %>
-        <% dropdown("delete").each do |x| %>
-          <%= x %> 
+        <% unless session[:user] == nil %> 
+          <% dropdown("delete").each do |x|  %>
+            <%= x %> 
+          <% end %>
+        <% end %>
+        <% if session[:user] == nil %>
+          <li><a href="/login">Log In</a></li>
+        <% else %>
+          <li><a href="/logout">Log Out</a></li>
         <% end %>
       </ul>
     </nav>

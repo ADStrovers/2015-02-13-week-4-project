@@ -4,8 +4,8 @@ module FormCreate
     string_array << partial(:'/partials/hidden_type', :locals => { :type => params[:type] })
     requirements.each do |req|
       case req
-      when "name", "address"
-        string_array << partial(:'/partials/name_address', :layout => false, :locals => { :req => req })
+      when "name", "address", "password", "username"
+        string_array << partial(:'/partials/textbox', :layout => false, :locals => { :req => req })
       when "panel_id"
         string_array << partial(:'/partials/panel_id', :layout => false, :locals => { :req => req })
       when "person_id"

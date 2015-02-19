@@ -1,0 +1,16 @@
+<% unless session[:error_message] == nil %>
+  <%= session[:error_message] %>
+  <% session[:error_message] = nil %>
+<% end %>
+<form action="/user_validation">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" name="username">
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="text" name="password">
+  </div>
+  <button type="submit">Sign In</button>
+</form>
+<a href="/signup">Not Currently a User?  Sign Up Here!</a>

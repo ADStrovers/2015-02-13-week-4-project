@@ -1,8 +1,8 @@
 module EditFormat
   
   def edit_output(obj)
-    string_array = ["<input type=\"hidden\" name=\"type\" value=\"#{params[:type]}\">", 
-                    "<input type=\"hidden\" name=\"id\" value=\"#{obj.id}\">"]
+    string_array = ["<input type=\"hidden\" name=\"id\" value=\"#{obj.id}\">"]
+    string_array << partial(:'/partials/hidden_type', :layout => false, :locals => { :type => params[:type] })
     obj.instance_variables.each do |var|
       unless var == :@id
         var = var.to_s.delete("@")

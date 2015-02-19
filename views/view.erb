@@ -3,6 +3,8 @@
     <% view_output(@obj).each do |item| %>
       <%= item %>
     <% end %>
-    <p><button type="submit">Click Here to Edit This <%= params[:type].capitalize %></button></p>
+    <% unless session[:user] == nil %>
+      <p><button type="submit">Click Here to Edit This <%= params[:type].capitalize %></button></p>
+    <% end %>
   </form>
 </div>

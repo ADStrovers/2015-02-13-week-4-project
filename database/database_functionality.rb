@@ -14,7 +14,7 @@ module DatabaseMethods
     # State Changes:
     # None
     
-    def delete
+    def delete(id)
       DATABASE.execute("DELETE FROM #{self.to_s.pluralize} WHERE id = #{id}")
     end
     

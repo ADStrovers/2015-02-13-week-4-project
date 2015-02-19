@@ -10,6 +10,7 @@ require_relative 'require_handler'
 include RequireHandler
 
 set :partial_template_engine, :erb
+enable :sessions
 
 DATABASE = SQLite3::Database.new("./database/convention_manager.db")
 
@@ -19,9 +20,15 @@ req_rel("helpers")
 
 helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper, EditFormat
 
-before do
-  if params[:type] == nil
-    redirect to("/?type=none")
+# ==============
+# Before Filters
+# ==============
+
+['/view', '/search', '/create', '/delete'].each do |path|
+  before path do
+    if params[:type] == nil
+      redirect to("/?type=none")
+    end
   end
 end
 
@@ -31,13 +38,15 @@ end
   end
 end
 
-
-
 before "/new" do 
   if params[:correct] == "no"
     request.path_info = "/create"
   end
 end
+
+# ===============
+# Router Handlers
+# ===============
 
 get "/" do
   erb :main
@@ -52,6 +61,10 @@ get "/create" do
 end
 
 get "/new" do
+  if params[:type] == "person"
+    params["password"] = params["password"].hash
+  end
+  binding.pry
   @obj = to_class(params[:type]).new(params)
   @obj.insert
   redirect_assist("view")
@@ -102,11 +115,37 @@ end
 
 get "/confirm_add" do
   @obj = to_class(params[:type]).new(params)
-  binding.pry
   erb :confirm_add
 end
 
 get "/remove" do
-  
+  to_class(params[:type]).delete(params[:id])
+  redirect to('/')
 end
-  
+
+get "/logout" do
+  session[:user] = nil
+  redirect to("/")
+end
+
+get "/login" do
+  erb :login
+end
+
+get "/user_validation" do
+  validator = Person.search_for("username", params[:username])[0]
+  binding.pry
+  if validator == [] || params[:password].hash != validator.password
+    session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
+    redirect to("/login")
+  else
+    session[:user] = validator.username
+    redirect to "/"
+  end
+end
+
+get "/signup" do
+  params[:type] = "person"
+  @reqs = get_requirements(params[:type])
+  erb :signup
+end
