@@ -151,7 +151,7 @@ get "/user_validation" do
     session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
     redirect to("/login")
   else
-    session[:user] = validator.username
+    session[:username] = validator.username
     redirect to "/"
   end
 end
