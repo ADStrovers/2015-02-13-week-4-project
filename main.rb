@@ -18,7 +18,8 @@ req_rel("database")
 req_rel("models")
 req_rel("helpers")
 
-helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper, EditFormat
+helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper, EditFormat,
+        Validators
 
 # ==============
 # Before Filters
@@ -39,6 +40,14 @@ end
 end
 
 before "/new" do 
+  unless validate_presence_of(params[:username])
+    session[:error_message] = "I'm sorry.  You must enter a username before proceeding."
+    redirect to("/signup")
+  end
+  unless validate_presence_of(params[:password])
+    session[:error_message] = "I'm sorry.  You must enter a password before proceeding."
+    redirect to("/signup")
+  end
   if params[:correct] == "no"
     request.path_info = "/create"
   end
@@ -64,7 +73,6 @@ get "/new" do
   if params[:type] == "person"
     params["password"] = params["password"].hash
   end
-  binding.pry
   @obj = to_class(params[:type]).new(params)
   @obj.insert
   redirect_assist("view")
@@ -134,7 +142,6 @@ end
 
 get "/user_validation" do
   validator = Person.search_for("username", params[:username])[0]
-  binding.pry
   if validator == [] || params[:password].hash != validator.password
     session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
     redirect to("/login")

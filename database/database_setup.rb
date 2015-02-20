@@ -18,6 +18,7 @@ DATABASE.execute("CREATE TABLE IF NOT EXISTS conventions
 DATABASE.execute("CREATE TABLE IF NOT EXISTS panels
                   (id INTEGER PRIMARY KEY,
                   name TEXT NOT NULL CHECK(name!=''),
+                  creator_id INTEGER NOT NULL,
                   convention_id INTEGER NOT NULL)")
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS panels_people

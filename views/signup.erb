@@ -1,3 +1,4 @@
+<%= partial :'/partials/error_message', :layout => false %>
 <form action="/new">
   <% create_form(@reqs).each do |line| %>
     <%= line %>
