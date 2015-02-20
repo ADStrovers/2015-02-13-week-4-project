@@ -73,15 +73,17 @@ module DatabaseMethods
       results_as_objects = []
       
       if value.is_a? Integer
-        results = DATABASE.execute("SELECT * FROM #{self.to_s.pluralize} WHERE #{field} LIKE #{value + '%'}")
+        results = DATABASE.execute("SELECT * FROM #{self.to_s.pluralize} WHERE #{field} = #{value}")
       else
         results = DATABASE.execute("SELECT * FROM #{self.to_s.pluralize} WHERE #{field} LIKE '#{value + '%'}'")
       end
       
+      binding.pry
       results.each do |item|
         results_as_objects << self.new(item) if item != nil
       end
       
+      binding.pry
       results_as_objects
     end
     

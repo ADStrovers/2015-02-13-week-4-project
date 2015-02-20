@@ -6,6 +6,7 @@ class Convention
     @id = options["id"]
     @name = options["name"]
     @address = options["address"]
+    @creator_id = options["creator_id"]
     get_lat_and_long(@address) unless @address == nil
   end
   

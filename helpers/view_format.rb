@@ -17,4 +17,8 @@ module ViewFormat
     string_array
   end
   
+  def get_username(id)
+    username = Person.search_for("id", id)[0].username
+  end
+  
 end
