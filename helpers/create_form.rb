@@ -1,4 +1,17 @@
 module FormCreate
+  
+  # Public: #create_form
+  # Helps direct a erb form creation to the proper partials based on field name.
+  #
+  # Parameters:
+  # requirements - Array of field names that need to be addressed.
+  #
+  # Returns:
+  # Array full of HTML to create the input for a form
+  #
+  # State Changes:
+  # None
+  
   def create_form(requirements)
     string_array = []
     string_array << partial(:'/partials/hidden_type', :locals => { :type => params[:type] })

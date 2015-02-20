@@ -1,6 +1,6 @@
 class Convention
   include DatabaseMethods
-  attr_accessor :name, :address, :latitude, :longitude, :id
+  attr_accessor :name, :address, :latitude, :longitude, :id, :creator_id
   
   def initialize(options)
     @id = options["id"]

@@ -1,5 +1,17 @@
 module EditFormat
   
+  # Public: #create_form
+  # Helps direct a erb form creation to the proper partials based on field name.
+  #
+  # Parameters:
+  # requirements - Array of field names that need to be addressed.
+  #
+  # Returns:
+  # Array full of HTML to create the input for a form
+  #
+  # State Changes:
+  # None
+  
   def edit_output(obj)
     string_array = ["<input type=\"hidden\" name=\"id\" value=\"#{obj.id}\">"]
     string_array << partial(:'/partials/hidden_type', :layout => false, :locals => { :type => params[:type] })

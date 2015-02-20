@@ -3,7 +3,8 @@
     <% view_output(@obj).each do |item| %>
       <%= item %>
     <% end %>
-    <% unless session[:user] == nil %>
+    <% binding.pry %>
+    <% if session[:user] == Person.search_for('id', @obj.id)[0]["username"] %>
       <p><button type="submit">Click Here to Edit This <%= params[:type].capitalize %></button></p>
     <% end %>
   </form>

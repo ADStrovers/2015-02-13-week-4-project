@@ -5,6 +5,7 @@ require 'rubygems'
 require 'active_support/inflector'
 require 'geocoder'
 require 'sinatra/partial'
+require 'bcrypt'
 require_relative 'require_handler'
 
 include RequireHandler
@@ -71,9 +72,12 @@ end
 
 get "/new" do
   if params[:type] == "person"
-    params["password"] = params["password"].hash
+    params["password"] = BCrypt::Password.create(params["password"])
   end
   @obj = to_class(params[:type]).new(params)
+  unless params[:type] == "person"
+    @obj.creator_id = Person.search_for("username", session[:username])[0].id
+  end
   @obj.insert
   redirect_assist("view")
 end
@@ -142,7 +146,8 @@ end
 
 get "/user_validation" do
   validator = Person.search_for("username", params[:username])[0]
-  if validator == [] || params[:password].hash != validator.password
+  validator.password = BCrypt::Password.new(validator.password)
+  if validator == [] || validator.password != params[:password]
     session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
     redirect to("/login")
   else

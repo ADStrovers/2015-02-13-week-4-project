@@ -1,4 +1,23 @@
+# Module: DatabaseMethods
+#
+# Assists models with database queries by giving them access to new instance methods
+#
+# Public Methods:
+# #requirements
+# #requirements_with_id
+# #insert
+# #save
+
 module DatabaseMethods
+  
+  # Module: DatabaseClassMethods
+  #
+  # Assists models with database queries by giving them access to new class methods
+  #
+  # Public Methods:
+  # #delete
+  # #all
+  # #search_for
   
   module DatabaseClassMethods
     
