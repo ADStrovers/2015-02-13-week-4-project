@@ -3,8 +3,7 @@
     <% view_output(@obj).each do |item| %>
       <%= item %>
     <% end %>
-    <% binding.pry %>
-    <% if session[:user] == get_username(@obj.creator_id) %>
+    <% if session[:username] == get_username(@obj.creator_id) %>
       <p><button type="submit">Click Here to Edit This <%= params[:type].capitalize %></button></p>
     <% end %>
   </form>

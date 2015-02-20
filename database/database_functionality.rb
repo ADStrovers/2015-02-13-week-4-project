@@ -78,12 +78,10 @@ module DatabaseMethods
         results = DATABASE.execute("SELECT * FROM #{self.to_s.pluralize} WHERE #{field} LIKE '#{value + '%'}'")
       end
       
-      binding.pry
       results.each do |item|
         results_as_objects << self.new(item) if item != nil
       end
       
-      binding.pry
       results_as_objects
     end
     
