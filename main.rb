@@ -136,7 +136,7 @@ get "/remove" do
 end
 
 get "/logout" do
-  session[:user] = nil
+  session[:username] = nil
   redirect to("/")
 end
 
@@ -147,6 +147,7 @@ end
 get "/user_validation" do
   validator = Person.search_for("username", params[:username])[0]
   validator.password = BCrypt::Password.new(validator.password)
+  binding.pry
   if validator == [] || validator.password != params[:password]
     session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
     redirect to("/login")
