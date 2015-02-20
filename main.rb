@@ -94,6 +94,7 @@ get "/search_results" do
   if params[:field].nil? || params[:value].nil?
     redirect to("/search?#{params[:type]}")
   end
+  binding.pry
   @results = to_class(params[:type]).search_for("#{params[:field]}", params[:value])
   erb :search_results
 end
