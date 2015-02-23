@@ -1,3 +1,18 @@
+# Class: Convention
+#
+# Models our Convention data.
+#
+# Attributes:
+# @id         - Integer: Primary key for our database information
+# @name       - String: the convention's name
+# @address    - String: The street address for the convention location
+# @creator_id - Integer: Primary key for our user that created the convention
+# @latitude   - Float: Latitude provided by geocoder for our @address
+# @longitude  - Float: Longitude provided by geocoder for our @address
+#
+# Public Methods:
+# #get_lat_and_long
+
 class Convention
   include DatabaseMethods
   attr_accessor :name, :address, :latitude, :longitude, :id, :creator_id

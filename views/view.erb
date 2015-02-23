@@ -14,7 +14,7 @@
       <button type="attend">Click Here to Attend</button>
     </p>
   </form>
-  <% unless @panels == [] %>
+  <% unless @panels == [] || @panels == nil %>
     <p>Panels Registered For This Convention:</p>
     <% @panels.each do |x| %>
       <a href="/view?type=panel&id=<%= x.id %>"><%= x.name %></a>
