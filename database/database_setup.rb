@@ -23,8 +23,10 @@ DATABASE.execute("CREATE TABLE IF NOT EXISTS panels
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS panels_people
                   (panel_id INTEGER,
-                  person_id INTEGER)")
+                  person_id INTEGER,
+                  UNIQUE(panel_id, person_id))")
                   
 DATABASE.execute("CREATE TABLE IF NOT EXISTS conventions_people
                   (convention_id INTEGER,
-                  person_id INTEGER)")
+                  person_id INTEGER,
+                  UNIQUE(convention_id, person_id))")

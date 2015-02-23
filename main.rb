@@ -79,7 +79,12 @@ get "/new" do
     @obj.creator_id = Person.search_for("username", session[:username])[0].id
   end
   @obj.insert
-  redirect_assist("view")
+  if params[:type] == "person"
+    query_string = request.query_string
+    redirect to("/user_validation?#{query_string}")
+  else
+    redirect_assist("view")
+  end
 end
 
 get "/search" do
@@ -100,6 +105,9 @@ end
 
 get "/view" do
   @obj = @results[0]
+  if params[:type] == "convention"
+    @panels = Panel.search_for("convention_id", params[:id])
+  end
   erb :view
 end
 
@@ -132,6 +140,7 @@ end
 
 get "/remove" do
   to_class(params[:type]).delete(params[:id])
+  session[:message] = "You have successfully deleted the #{params[:type].capitalize}"
   redirect to('/')
 end
 
@@ -147,12 +156,12 @@ end
 get "/user_validation" do
   validator = Person.search_for("username", params[:username])[0]
   validator.password = BCrypt::Password.new(validator.password)
-  binding.pry
   if validator == [] || validator.password != params[:password]
     session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
     redirect to("/login")
   else
     session[:username] = validator.username
+    session[:message] = "Welcome #{session[:username]}.  Thank you for coming by."
     redirect to "/"
   end
 end
@@ -161,4 +170,17 @@ get "/signup" do
   params[:type] = "person"
   @reqs = get_requirements(params[:type])
   erb :signup
+end
+
+get "/attend" do
+  query_string = request.query_string
+  @person = Person.search_for("username", session[:username])[0]
+  @person.send("attend_#{params[:type]}".to_sym, params[:id])
+  session[:message] = "You are now attending the #{params[:type].capitalize}.  Thank you!"
+  redirect to("/?#{query_string}")
+end
+
+get "/search_near" do
+  @results = Convention.search_for("id", "")
+  binding.pry
 end

@@ -5,7 +5,7 @@ class Panel
   def initialize(options)
     @id = options["id"]
     @name = options["name"]
-    @creator_id = options["speaker_id"]
+    @creator_id = options["creator_id"]
     @convention_id = options["convention_id"]
   end
   

@@ -1,6 +1,6 @@
 <div>
   <label for="<%= req %>"><%= req.capitalize.delete("_id") %></label>
-  <select>
+  <select name="person_id">
     <% @person_list.each do |item| %>
       <option value="<%= item.id %>"><%= item.name %></option>
     <% end %>

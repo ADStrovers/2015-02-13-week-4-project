@@ -9,4 +9,12 @@ class Person
     @password = options["password"]
   end
   
+  def attend_convention(id)
+    DATABASE.execute("INSERT INTO conventions_people (convention_id, person_id) VALUES (#{id}, #{self.id})")
+  end
+  
+  def attend_panel(id)
+    DATABASE.execute("INSERT INTO panels_people (panel_id, person_id) VALUES (#{id}, #{self.id})")
+  end
+  
 end

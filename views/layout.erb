@@ -12,17 +12,32 @@
       <ul>
         <li><a href="/">Home</a></li>
         <% unless session[:username] == nil %>
-          <% dropdown("create").each do |x| %>
-            <%= x %> 
-          <% end %>
+          <li>Create
+            <ul class="dropdown_menu">
+              <li><a href="/create?type=convention">Convention</a></li> 
+              <li><a href="/create?type=panel">Panel</a></li> 
+            </ul>
+          </li>
         <% end %>
-        <% dropdown("search").each do |x| %>
-          <%= x %> 
-        <% end %>
-        <% unless session[:username] == nil %> 
-          <% dropdown("delete").each do |x|  %>
-            <%= x %> 
-          <% end %>
+        <li>Search By Details
+          <ul class="dropdown_menu">
+            <li><a href="/search?type=convention">Convention</a></li>
+            <li><a href="/search?type=panel">Panel</a></li> 
+          </ul>
+        </li>
+          <%# <li>Search By Location
+            <ul class="dropdown_menu">
+              <li><a href="/search_near?type=convention">Near Me</a></li>
+              <li><a href="/search_near?type=convention">Other Location</a></li>
+            </ul>
+          </li> %>
+        <% unless session[:username] == nil %>
+          <li>Delete
+            <ul class="dropdown_menu">
+              <li><a href="/delete?type=convention">Convention</a></li>
+              <li><a href="/delete?type=panel">Panel</a></li> 
+            </ul>
+          </li>
         <% end %>
         <% if session[:username] == nil %>
           <li><a href="/login">Log In</a></li>
@@ -31,7 +46,10 @@
         <% end %>
       </ul>
     </nav>
-    <div class="yielded"><%= yield %></div>
+    <div class="yielded">
+      <%= partial :'/partials/error_message', :layout => false %>
+      <%= yield %>
+    </div>
   </body>
 
 </html>

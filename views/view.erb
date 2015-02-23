@@ -7,4 +7,17 @@
       <p><button type="submit">Click Here to Edit This <%= params[:type].capitalize %></button></p>
     <% end %>
   </form>
+  <form action="/attend">
+    <input hidden="true" name="id" value="<%= @obj.id %>">
+    <input hidden="true" name="type" value="<%= params[:type] %>">
+    <p>
+      <button type="attend">Click Here to Attend</button>
+    </p>
+  </form>
+  <% unless @panels == [] %>
+    <p>Panels Registered For This Convention:</p>
+    <% @panels.each do |x| %>
+      <a href="/view?type=panel&id=<%= x.id %>"><%= x.name %></a>
+    <% end %>
+  <% end %>
 </div>
