@@ -1,28 +1,21 @@
 require 'sinatra'
-require_relative 'load.rb'
+require 'sqlite3'
+require 'pry'
+require 'rubygems'
+require 'active_support/inflector'
+require 'geocoder'
+require 'sinatra/partial'
+require 'bcrypt'
 
-# ==============
-# Before Filters
-# ==============
+set :partial_template_engine, :erb
+enable :sessions
 
-before "/new" do 
-  unless validate_presence_of(params[:username])
-    session[:error_message] = "I'm sorry.  You must enter a username before proceeding."
-    redirect to("user/signup")
-  end
-  unless validate_presence_of(params[:password])
-    session[:error_message] = "I'm sorry.  You must enter a password before proceeding."
-    redirect to("user/signup")
-  end
-  if params[:correct] == "no"
-    request.path_info = "creation/create"
-  end
-end
+DATABASE = SQLite3::Database.new("./database/convention_manager.db")
 
-# ===============
-# Router Handlers
-# ===============
+Dir['./database/*.rb'].each { |file| require file }
+Dir['./models/*.rb'].each { |file| require file }
+Dir['./helpers/*.rb'].each { |file| require file }
+Dir['./controllers/*.rb'].each { |file| require file }
 
-get "/" do
-  erb :main
-end
+helpers StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper, EditFormat,
+        Validators
