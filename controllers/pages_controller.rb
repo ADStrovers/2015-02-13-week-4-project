@@ -1,3 +1,3 @@
 get "/" do
-  erb :"pages/home
+  erb :"pages/home"
 end

@@ -1,7 +1,6 @@
 <div>
   <p>Please select what you would like to search for:</p>
-  <form action="view/search_results">
-    <input name="type" value="<%= params[:type] %>" hidden="true">
+  <form action="/search_results/<%= params[:type] %>">
     <select name="field" title="Select what you would like to search for:">
       <% @reqs.each do |x| %>
         <option value="<%= x %>"><%= x %></option>

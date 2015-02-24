@@ -1,4 +1,4 @@
-<form action="creation/confirm_add">
+<form action="/confirm_add/<%= params[:type] %>">
   <% create_form(@reqs).each do |line| %>
     <%= line %>
   <% end %>

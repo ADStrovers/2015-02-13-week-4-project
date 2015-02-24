@@ -1,16 +1,14 @@
 <div>
-  <form action="edit/edit">
+  <form action="/edit/<%= params[:type] %>">
     <% view_output(@obj).each do |item| %>
       <%= item %>
     <% end %>
-    <% binding.pry %>
     <% if session[:username] == Person.get_username(@obj.creator_id) %>
       <p><button type="submit">Click Here to Edit This <%= params[:type].capitalize %></button></p>
     <% end %>
   </form>
-  <form action="/attend">
+  <form action="/attend/<%= params[:type] %>">
     <input hidden="true" name="id" value="<%= @obj.id %>">
-    <input hidden="true" name="type" value="<%= params[:type] %>">
     <p>
       <button type="attend">Click Here to Attend</button>
     </p>
@@ -18,7 +16,7 @@
   <% unless @panels == [] || @panels == nil %>
     <p>Panels Registered For This Convention:</p>
     <% @panels.each do |x| %>
-      <a href="view/view?type=panel&id=<%= x.id %>"><%= x.name %></a>
+      <a href="/view/panel?id=<%= x.id %>"><%= x.name %></a>
     <% end %>
   <% end %>
 </div>

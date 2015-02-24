@@ -1,6 +1,5 @@
 <div>
-  <form action="deletion/confirm_delete">
-    <input type="text" name="type" hidden="true" value="<%= params[:type] %>">
+  <form action="/confirm_delete/<%= params[:type] %>">
     <select name="id">
       <% @results.each do |item| %>
         <option value="<%= item.id %>"><%= item.name %></option>

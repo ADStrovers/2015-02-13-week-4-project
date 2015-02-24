@@ -14,7 +14,6 @@ module ViewFormat
   
   def view_output(obj)
     string_array = ["<input type=\"hidden\" name=\"id\" value=\"#{params[:id]}\">"]
-    string_array << partial(:'/partials/hidden_type', :layout => false, :locals => { :type => params[:type] })
     obj.instance_variables.each do |var|
       unless var == :@id
         var = var.to_s.delete("@")

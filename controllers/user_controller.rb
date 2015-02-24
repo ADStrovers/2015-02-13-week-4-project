@@ -1,9 +1,9 @@
-get "/user/logout" do
+get "/logout" do
   session[:username] = nil
   redirect to("/")
 end
 
-get "/user/login" do
+get "/login" do
   erb :"user/login"
 end
 
@@ -20,16 +20,16 @@ get "/user_validation" do
   end
 end
 
-get "/user/signup" do
+get "/signup" do
   params[:type] = "person"
   @reqs = get_requirements(params[:type])
   erb :"user/signup"
 end
 
-get "/attend" do
+get "/attend/:type" do
   query_string = request.query_string
   @person = Person.search_for("username", session[:username])[0]
   @person.send("attend_#{params[:type]}".to_sym, params[:id])
   session[:message] = "You are now attending the #{params[:type].capitalize}.  Thank you!"
-  redirect to("/?#{query_string}")
+  redirect to("/")
 end

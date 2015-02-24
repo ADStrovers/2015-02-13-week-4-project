@@ -1,23 +1,23 @@
-get "/view/search" do
+get "/search/:type" do
   unless params[:id] == nil
-    redirect_assist("view")
+    redirect_assist("view/#{params[type]}")
   end
   @reqs = get_requirements_with_id(params[:type])
-  erb :search
+  erb :"view/search"
 end
 
-get "/view/search_results" do
+get "/search_results/:type" do
   if params[:field].nil? || params[:value].nil?
-    redirect to("view/search?#{params[:type]}")
+    redirect to("/search/#{params[:type]}")
   end
   @results = to_class(params[:type]).search_for("#{params[:field]}", params[:value])
-  erb :search_results
+  erb :"view/search_results"
 end
 
-get "/view/view" do
+get "/view/:type" do
   @obj = @results[0]
   if params[:type] == "convention"
     @panels = Panel.search_for("convention_id", params[:id])
   end
-  erb :view
+  erb :"view/view"
 end

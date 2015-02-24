@@ -12,7 +12,7 @@ before "/new" do
   end
 end
 
-get "/creation/create" do
+get "/create/:type" do
   @reqs = get_requirements(params[:type])
   @convention_list = Convention.all
   @person_list = Person.all
@@ -20,7 +20,7 @@ get "/creation/create" do
   erb :"creation/create"
 end
 
-get "/new" do
+get "/new/:type" do
   if params[:type] == "person"
     params["password"] = BCrypt::Password.create(params["password"])
   end
@@ -33,11 +33,11 @@ get "/new" do
     query_string = request.query_string
     redirect to("/user_validation?#{query_string}")
   else
-    redirect_assist("view")
+    redirect_assist("view/#{params[:type]}")
   end
 end
 
-get "/creation/confirm_add" do
+get "/confirm_add/:type" do
   @obj = to_class(params[:type]).new(params)
   erb :"creation/confirm_add"
 end

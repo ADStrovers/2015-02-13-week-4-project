@@ -14,7 +14,6 @@ module FormCreate
   
   def create_form(requirements)
     string_array = []
-    string_array << partial(:'/partials/hidden_type', :locals => { :type => params[:type] })
     requirements.each do |req|
       case req
       when "name", "address", "password", "username"

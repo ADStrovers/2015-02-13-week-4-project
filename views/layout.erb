@@ -14,33 +14,33 @@
         <% unless session[:username] == nil %>
           <li>Create
             <ul class="dropdown_menu">
-              <li><a href="creation/create"?type=convention">Convention</a></li> 
-              <li><a href="creation/create"?type=panel">Panel</a></li> 
+              <li><a href="/create/convention">Convention</a></li> 
+              <li><a href="/create/panel">Panel</a></li> 
             </ul>
           </li>
         <% end %>
         <li>Search By Details
           <ul class="dropdown_menu">
-            <li><a href="view/search?type=convention">Convention</a></li>
-            <li><a href="view/search?type=panel">Panel</a></li> 
+            <li><a href="/search/convention">Convention</a></li>
+            <li><a href="/search/panel">Panel</a></li> 
           </ul>
         </li>
           <%# <li>Search By Location
             <ul class="dropdown_menu">
-              <li><a href="view/search_near?type=convention">Near Me</a></li>
-              <li><a href="view/search_near?type=convention">Other Location</a></li>
+              <li><a href="/search_near?type=convention">Near Me</a></li>
+              <li><a href="/search_near?type=convention">Other Location</a></li>
             </ul>
           </li> %>
         <% unless session[:username] == nil %>
           <li>Delete
             <ul class="dropdown_menu">
-              <li><a href="deletion/delete?type=convention">Convention</a></li>
-              <li><a href="deletion/delete?type=panel">Panel</a></li> 
+              <li><a href="/delete/convention">Convention</a></li>
+              <li><a href="/delete/panel">Panel</a></li> 
             </ul>
           </li>
         <% end %>
         <% if session[:username] == nil %>
-          <li><a href="user/login">Log In</a></li>
+          <li><a href="/login">Log In</a></li>
         <% else %>
           <li><a href="/logout">Log Out</a></li>
         <% end %>
