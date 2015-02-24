@@ -1,44 +1,9 @@
-require 'sqlite3'
-require 'pry'
 require 'sinatra'
-require 'rubygems'
-require 'active_support/inflector'
-require 'geocoder'
-require 'sinatra/partial'
-require 'bcrypt'
-require_relative 'require_handler'
-
-include RequireHandler
-
-set :partial_template_engine, :erb
-enable :sessions
-
-DATABASE = SQLite3::Database.new("./database/convention_manager.db")
-
-req_rel("database")
-req_rel("models")
-req_rel("helpers")
-
-helpers Dropdown, StringToClass, FormCreate, GetMap, ViewFormat, RedirectHelper, EditFormat,
-        Validators
+require_relative 'load.rb'
 
 # ==============
 # Before Filters
 # ==============
-
-['/view', '/search', '/create', '/delete'].each do |path|
-  before path do
-    if params[:type] == nil
-      redirect to("/?type=none")
-    end
-  end
-end
-
-['/view', "/edit"].each do |path|
-  before path do
-    @results = to_class(params[:type]).search_for("id", params[:id])
-  end
-end
 
 before "/new" do 
   unless validate_presence_of(params[:username])

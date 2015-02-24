@@ -64,4 +64,18 @@ class DatabaseMethodsTest < Minitest::Test
     assert_equal Array.new, second_assert
   end
   
+  def test_object_should_not_return_an_id_with_requirements
+    test = Person.new({"name" => "Erin Skoog", "username" => "eskoog87", "password" => "test"})
+    req = test.requirements
+    
+    assert !req.include?("id")
+    assert req.include?("name")
+    
+    req = test.requirements_with_id
+    
+    assert req.include?("id")
+  end
+  
+  
+  
 end

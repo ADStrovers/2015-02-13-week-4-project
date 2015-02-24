@@ -1,5 +1,17 @@
 module ViewFormat
   
+  # Public: #view_output
+  # Returns HTML for automating forms.
+  #
+  # Parameters:
+  # obj - Object
+  #
+  # Returns:
+  # An array of html elements
+  #
+  # State Changes:
+  # None
+  
   def view_output(obj)
     string_array = ["<input type=\"hidden\" name=\"id\" value=\"#{params[:id]}\">"]
     string_array << partial(:'/partials/hidden_type', :layout => false, :locals => { :type => params[:type] })
@@ -15,10 +27,6 @@ module ViewFormat
     end
     
     string_array
-  end
-  
-  def get_username(id)
-    username = Person.search_for("id", id)[0].username
   end
   
 end
