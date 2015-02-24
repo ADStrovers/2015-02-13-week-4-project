@@ -1,10 +1,10 @@
-get "/logout" do
+get "/user/logout" do
   session[:username] = nil
   redirect to("/")
 end
 
-get "/login" do
-  erb :login
+get "/user/login" do
+  erb :"user/login"
 end
 
 get "/user_validation" do
@@ -12,7 +12,7 @@ get "/user_validation" do
   validator.password = BCrypt::Password.new(validator.password)
   if validator == [] || validator.password != params[:password]
     session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
-    redirect to("/login")
+    redirect to("user/login")
   else
     session[:username] = validator.username
     session[:message] = "Welcome #{session[:username]}.  Thank you for coming by."
@@ -20,10 +20,10 @@ get "/user_validation" do
   end
 end
 
-get "/signup" do
+get "/user/signup" do
   params[:type] = "person"
   @reqs = get_requirements(params[:type])
-  erb :signup
+  erb :"user/signup"
 end
 
 get "/attend" do

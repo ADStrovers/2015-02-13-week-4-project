@@ -1,6 +1,6 @@
 <div>
   <p>Your results:</p>
-  <form action="/view">
+  <form action="view/view">
     <input type="hidden" name="type" value="<%= params[:type] %>">
     <select name="id">
       <% @results.each do |item| %>

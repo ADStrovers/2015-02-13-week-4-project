@@ -6,7 +6,7 @@
   end
 end
 
-['/view', "/edit"].each do |path|
+['/view', "edit/edit"].each do |path|
   before path do
     @results = to_class(params[:type]).search_for("id", params[:id])
   end

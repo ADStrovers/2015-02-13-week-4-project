@@ -1,11 +1,11 @@
-get "/delete" do
+get "/deletion/delete" do
   @results = to_class(params[:type]).all
-  erb :delete
+  erb :"deletion/delete"
 end
 
-get "/confirm_delete" do
+get "/deletion/confirm_delete" do
   @obj = to_class(params[:type]).search_for("id", params[:id])[0]
-  erb :confirm_delete
+  erb :"deletion/confirm_delete"
 end
 
 get "/remove" do

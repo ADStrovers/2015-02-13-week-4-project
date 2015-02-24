@@ -1,4 +1,4 @@
-get "/search" do
+get "/view/search" do
   unless params[:id] == nil
     redirect_assist("view")
   end
@@ -6,15 +6,15 @@ get "/search" do
   erb :search
 end
 
-get "/search_results" do
+get "/view/search_results" do
   if params[:field].nil? || params[:value].nil?
-    redirect to("/search?#{params[:type]}")
+    redirect to("view/search?#{params[:type]}")
   end
   @results = to_class(params[:type]).search_for("#{params[:field]}", params[:value])
   erb :search_results
 end
 
-get "/view" do
+get "/view/view" do
   @obj = @results[0]
   if params[:type] == "convention"
     @panels = Panel.search_for("convention_id", params[:id])

@@ -1,5 +1,5 @@
 <div>
-  <form action="/edit">
+  <form action="edit/edit">
     <% view_output(@obj).each do |item| %>
       <%= item %>
     <% end %>
@@ -18,7 +18,7 @@
   <% unless @panels == [] || @panels == nil %>
     <p>Panels Registered For This Convention:</p>
     <% @panels.each do |x| %>
-      <a href="/view?type=panel&id=<%= x.id %>"><%= x.name %></a>
+      <a href="view/view?type=panel&id=<%= x.id %>"><%= x.name %></a>
     <% end %>
   <% end %>
 </div>

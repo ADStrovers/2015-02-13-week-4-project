@@ -1,23 +1,23 @@
 before "/new" do 
   unless validate_presence_of(params[:username])
     session[:error_message] = "I'm sorry.  You must enter a username before proceeding."
-    redirect to("/signup")
+    redirect to("user/signup")
   end
   unless validate_presence_of(params[:password])
     session[:error_message] = "I'm sorry.  You must enter a password before proceeding."
-    redirect to("/signup")
+    redirect to("user/signup")
   end
   if params[:correct] == "no"
-    request.path_info = "/create"
+    request.path_info = "creation/create"
   end
 end
 
-get "/create" do
+get "/creation/create" do
   @reqs = get_requirements(params[:type])
   @convention_list = Convention.all
   @person_list = Person.all
   @panel_list = Panel.all
-  erb :create
+  erb :"creation/create"
 end
 
 get "/new" do
@@ -37,7 +37,7 @@ get "/new" do
   end
 end
 
-get "/confirm_add" do
+get "/creation/confirm_add" do
   @obj = to_class(params[:type]).new(params)
-  erb :confirm_add
+  erb :"creation/confirm_add"
 end
