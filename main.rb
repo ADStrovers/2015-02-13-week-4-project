@@ -144,8 +144,3 @@ get "/attend" do
   session[:message] = "You are now attending the #{params[:type].capitalize}.  Thank you!"
   redirect to("/?#{query_string}")
 end
-
-get "/search_near" do
-  @results = Convention.search_for("id", "")
-  binding.pry
-end
