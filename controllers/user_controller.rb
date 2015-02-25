@@ -26,7 +26,7 @@ get "/signup" do
   erb :"user/signup"
 end
 
-get "/attend/:type" do
+post "/attend/:type" do
   query_string = request.query_string
   @person = Person.search_for("username", session[:username])[0]
   @person.send("attend_#{params[:type]}".to_sym, params[:id])

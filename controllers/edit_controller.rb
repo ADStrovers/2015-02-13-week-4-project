@@ -3,7 +3,7 @@ get "/edit/:type" do
   erb :"edit/edit"
 end
 
-get "/save/:type" do
+post "/save/:type" do
   @obj = to_class(params[:type]).new(params)
   @obj.save
   query_string = request.query_string

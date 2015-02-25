@@ -1,5 +1,5 @@
 <div>
-  <form action="/save/<%= params[:type] %>">
+  <form action="/save/<%= params[:type] %>" method="post">
     <% edit_output(@obj).each do |item| %>
       <%= item %>
     <% end %>

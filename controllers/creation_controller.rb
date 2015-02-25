@@ -20,7 +20,8 @@ get "/create/:type" do
   erb :"creation/create"
 end
 
-get "/new/:type" do
+post "/new/:type" do
+  binding.pry
   if params[:type] == "person"
     params["password"] = BCrypt::Password.create(params["password"])
   end

@@ -7,7 +7,7 @@
       <p><button type="submit">Click Here to Edit This <%= params[:type].capitalize %></button></p>
     <% end %>
   </form>
-  <form action="/attend/<%= params[:type] %>">
+  <form action="/attend/<%= params[:type] %>" method="post">
     <input hidden="true" name="id" value="<%= @obj.id %>">
     <p>
       <button type="attend">Click Here to Attend</button>

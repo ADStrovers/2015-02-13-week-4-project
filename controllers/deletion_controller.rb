@@ -8,7 +8,7 @@ get "/confirm_delete/:type" do
   erb :"deletion/confirm_delete"
 end
 
-get "/remove/:type" do
+post "/remove/:type" do
   to_class(params[:type]).delete(params[:id])
   session[:message] = "You have successfully deleted the #{params[:type].capitalize}"
   redirect to('/')
