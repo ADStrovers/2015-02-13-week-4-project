@@ -1,7 +1,7 @@
 ['/view/:type', '/search/:type', '/create/:type', '/delete/:type'].each do |path|
   before path do
     if params[:type] == nil
-      redirect to("/?type=none")
+      redirect to("/?")
     end
   end
 end

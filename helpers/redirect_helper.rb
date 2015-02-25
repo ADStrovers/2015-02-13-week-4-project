@@ -1,5 +1,5 @@
 module RedirectHelper
   def redirect_assist(path)
-    redirect to("/#{path}?type=#{params[:type]}&id=#{@obj.id}")
+    redirect to("/#{path}?id=#{@obj.id}")
   end
 end

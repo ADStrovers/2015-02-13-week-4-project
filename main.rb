@@ -10,7 +10,7 @@ require 'bcrypt'
 set :partial_template_engine, :erb
 enable :sessions
 
-DATABASE = SQLite3::Database.new("./database/convention_manager.db")
+DATABASE = SQLite3::Database.new("./convention_manager.db")
 
 Dir['./database/*.rb'].each { |file| require file }
 Dir['./models/*.rb'].each { |file| require file }

@@ -12,7 +12,7 @@ get "/user_validation" do
   validator.password = BCrypt::Password.new(validator.password)
   if validator == [] || validator.password != params[:password]
     session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
-    redirect to("user/login")
+    redirect to("/login")
   else
     session[:username] = validator.username
     session[:message] = "Welcome #{session[:username]}.  Thank you for coming by."

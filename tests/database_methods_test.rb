@@ -3,7 +3,7 @@ require 'sqlite3'
 require 'rubygems'
 require 'active_support/inflector'
 
-DATABASE = SQLite3::Database.new("./tests/person_test.db")
+DATABASE = SQLite3::Database.new("./person_test.db")
 require_relative '../database/database_setup'
 
 require_relative '../database/database_functionality'
