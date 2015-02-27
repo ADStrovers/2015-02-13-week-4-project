@@ -13,7 +13,7 @@ module ViewFormat
   # None
   
   def view_output(obj)
-    string_array = ["<input type=\"hidden\" name=\"id\" value=\"#{params[:id]}\">"]
+    string_array = ["<input type=\"hidden\" name=\"id\" value=\"#{obj.id}\">"]
     obj.instance_variables.each do |var|
       unless var == :@id
         var = var.to_s.delete("@")

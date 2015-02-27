@@ -18,7 +18,7 @@ Dir['./helpers/*.rb'].each { |file| require file }
 Dir['./controllers/*.rb'].each { |file| require file }
 Dir['./classes/*.rb'].each { |file| require file }
 
-OBJECT_FACTORY = CreatorFactory.new
+OBJECT_HANDLER = CreatorFactory.new
 
 helpers FormCreate, GetMap, ViewFormat, RedirectHelper, EditFormat,
         Validators

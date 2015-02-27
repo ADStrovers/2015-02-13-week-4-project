@@ -20,7 +20,7 @@ end
 
 get "/signup" do
   params["type"] = "person"
-  @reqs = OBJECT_FACTORY.create_new_object(params).requirements
+  @reqs = OBJECT_HANDLER.create_new_object(params).requirements
   erb :"user/signup"
 end
 
