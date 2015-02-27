@@ -5,51 +5,64 @@
     <title>Week 4 Project</title>
   </head>
   <body>
-    <header>
-      <!-- White space -->
-    </header>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <% unless session[:username] == nil %>
-          <li>Create
-            <ul class="dropdown_menu">
-              <li><a href="/create/convention">Convention</a></li> 
-              <li><a href="/create/panel">Panel</a></li> 
-            </ul>
-          </li>
-        <% end %>
-        <li>Search By Details
-          <ul class="dropdown_menu">
-            <li><a href="/search/convention">Convention</a></li>
-            <li><a href="/search/panel">Panel</a></li> 
+    <div class="wrapper">
+      <header>
+        <nav>
+          <label for="show-menu" class="show-hidden">Show Menu</label>
+          <input type="checkbox" id="show-menu" class="hidden" role="button">
+          <ul id="hidden">
+            <li><a href="/">Home</a></li>
+            <% unless session[:username] == nil %>
+              <li>
+                <label for="show-create" class="show-hidden">Create</label>
+                <input type="checkbox" id="show-create" class="hidden" role="button">
+                <ul id="hidden">
+                  <li><a href="/create/convention">Convention</a></li> 
+                  <li><a href="/create/panel">Panel</a></li> 
+                </ul>
+              </li>
+            <% end %>
+            <li>
+              <label for="show-search" class="show-hidden">Search</label>
+              <input type="checkbox" id="show-search" class="hidden" role="button">
+              <ul id="hidden">
+                <li><a href="/search/convention">Convention</a></li>
+                <li><a href="/search/panel">Panel</a></li> 
+              </ul>
+            </li>
+              <%# <li>Search By Location
+                <ul class="dropdown_menu">
+                  <li><a href="/search_near?type=convention">Near Me</a></li>
+                  <li><a href="/search_near?type=convention">Other Location</a></li>
+                </ul>
+              </li> %>
+            <% unless session[:username] == nil %>
+              <li>
+                <label for="show-delete" class="show-hidden">Delete</label>
+                <input type="checkbox" id="show-delete" class="hidden" role="button">
+                <ul id="hidden">
+                  <li><a href="/delete/convention">Convention</a></li>
+                  <li><a href="/delete/panel">Panel</a></li> 
+                </ul>
+              </li>
+            <% end %>
+            <% if session[:username] == nil %>
+              <li><a href="/login">Log In</a></li>
+            <% else %>
+              <li><a href="/logout">Log Out</a></li>
+            <% end %>
           </ul>
-        </li>
-          <%# <li>Search By Location
-            <ul class="dropdown_menu">
-              <li><a href="/search_near?type=convention">Near Me</a></li>
-              <li><a href="/search_near?type=convention">Other Location</a></li>
-            </ul>
-          </li> %>
-        <% unless session[:username] == nil %>
-          <li>Delete
-            <ul class="dropdown_menu">
-              <li><a href="/delete/convention">Convention</a></li>
-              <li><a href="/delete/panel">Panel</a></li> 
-            </ul>
-          </li>
-        <% end %>
-        <% if session[:username] == nil %>
-          <li><a href="/login">Log In</a></li>
-        <% else %>
-          <li><a href="/logout">Log Out</a></li>
-        <% end %>
-      </ul>
-    </nav>
-    <div class="yielded">
-      <%= partial :'/partials/message', :layout => false %>
-      <%= yield %>
+        </nav>
+      </header>
+      <div class="yielded">
+        <%= partial :'/partials/message', :layout => false %>
+        <%= yield %>
+        <div class="push"></div>
+      </div>
     </div>
+    <footer>
+      <div class="copyright">©</div>
+    </footer>
   </body>
 
 </html>

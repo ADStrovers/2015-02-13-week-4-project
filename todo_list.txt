@@ -1,5 +1,4 @@
 # ----------------
-  Create a factory class for dealing with creation of objs based on params instead of having the controller handle it
-  Move validating the passwords into a model rather than having the controller handle it.
+  Create a factory class for dealing with creation of objs based on params instead of having the controller handle it - Done
+  Move validating the passwords into a model rather than having the controller handle it. - Almost done?
   Error messages handles by the (factory?) class rather than the controller
-  

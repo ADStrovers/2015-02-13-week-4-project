@@ -1,67 +1,103 @@
-ul li {
-  padding: 15px 20px;
-  display: inline-block;
-  position: relative;
-}
-
-ul li:hover{
-  background: #666;
-  color: #fff;
-}
-
-nav {
-  margin: auto;
-  text-align:center;
-  width: 100%;
-}
-
-ul {
-  list-style-type: none;
-  background: #98E393;
-  margin: 0px;
-  padding: 15px;
-  display: inline;
-}
-
-header {
-  width: 100%;
-  margin: 50px;
-  font-size: 14px;
+* {
   text-align: center;
-}
-
-ul li ul{
-  background: #666;
-  visibility: hidden;
-  padding: 0;
-  position: absolute;
-  top: 46px;
-  width: auto;
-  left: 0;
-}
-
-ul li ul li:hover{
-  background: #777;
-}
-
-ul li:hover ul{
-  display: block;
-  opacity: 1;
-  visibility: visible;
-  color: #fff;
-}
-
-ul li ul li a {
-  color: #FFF;
-  text-decoration: none;
 }
 
 body {
+  min-width: 400px;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  padding: 10px 0px;
+  background: black;
+  color: white;
+  position: fixed;
+  width: 100%;
+  
+}
+
+#hidden {
+  display: none;
+}
+
+nav ul {
+  list-style-type: none;
+  display: block;
+  width: 100%;
+  background: black;
+  color: white;
+  text-align: center;
+  margin: 0px;
+  padding: 2px;
+}
+
+ul li a {
+  display: block;
+}
+
+a {
+  color: white;
+}
+ul li ul {
+  display: none;
+  padding: 2px;
+}
+
+ul li ul li {
+  padding: 2px;
+}
+
+/*ul li:hover ul {
+  display: block;
+}*/
+
+input.hidden {
+  display: none;
+}
+
+label.show-hidden {
+  cursor: pointer;
+  display: block;
   text-align: center;
 }
 
-nav a {
+input#show-username {
+  display: none;
+}
+
+label.show-username {
+  cursor: pointer;
   display: block;
-  width: 80px;
-  height: 15px;
+  text-align: center;
+}
+
+label {
+  display: block;
+}
+
+label:hover {
+  cursor: auto;
+  width: 100%;
+}
+
+input[type=checkbox]:checked ~ #hidden{
+    display: block;
+}
+
+.yielded {
+  padding: 40px 10px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 35px;
+  background: gray;
+}
+
+.copyright {
+  height: 35px;
+  padding: 10px 0 0 0;
 }

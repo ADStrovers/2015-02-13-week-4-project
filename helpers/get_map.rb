@@ -13,7 +13,7 @@ module GetMap
   # None
   
   def get_map(obj)
-    map = "<img src=\"https://maps.googleapis.com/maps/api/staticmap?size=360x360&zoom=15&center=#{obj.address}&markers=#{obj.address}\">"
+    map = "<img src=\"https://maps.googleapis.com/maps/api/staticmap?size=320x320&zoom=15&center=#{obj.address}&markers=#{obj.address}\">"
   end
   
 end

@@ -2,7 +2,7 @@ get "/search/:type" do
   unless params[:id] == nil
     redirect_assist("view/#{params[type]}")
   end
-  @reqs = OBJECT_HANDLER.fetch_object_by_id(params).requirements_with_id
+  @reqs = OBJECT_HANDLER.create_new_object(params).requirements_with_id
   erb :"view/search"
 end
 

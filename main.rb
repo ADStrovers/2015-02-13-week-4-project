@@ -7,6 +7,8 @@ require 'geocoder'
 require 'sinatra/partial'
 require 'bcrypt'
 
+set :bind, '0.0.0.0'
+
 set :partial_template_engine, :erb
 enable :sessions
 
