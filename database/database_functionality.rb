@@ -91,7 +91,7 @@ module DatabaseMethods
   # Autorun when included into a class and it autoextended the class methods within this module.
   #
   # Returns:
-  # nil
+  # Boolean
   #
   # State Changes:
   # None

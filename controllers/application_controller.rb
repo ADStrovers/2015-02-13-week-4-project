@@ -1,13 +1,13 @@
 ['/view/:type', '/search/:type', '/create/:type', '/delete/:type'].each do |path|
   before path do
-    if params[:type] == nil
-      redirect to("/?")
+    unless ["person", "convention", "panel"].include? params[:type] 
+      redirect to("/")
     end
   end
 end
 
 ['/view/:type', 'edit/:type'].each do |path|
   before path do
-    @results = to_class(params[:type]).search_for("id", params[:id])
+    @obj = OBJECT_FACTORY.fetch_object_by_id(params)[0]
   end
 end

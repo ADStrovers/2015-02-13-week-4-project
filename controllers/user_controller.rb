@@ -8,28 +8,29 @@ get "/login" do
 end
 
 get "/user_validation" do
-  validator = Person.search_for("username", params[:username])[0]
-  validator.password = BCrypt::Password.new(validator.password)
-  if validator == [] || validator.password != params[:password]
-    session[:error_message] = "That is not a valid Username/Password pair.  Please try again."
-    redirect to("/login")
-  else
-    session[:username] = validator.username
+  if Person.validated?(params)
+    session[:username] = params["username"]
     session[:message] = "Welcome #{session[:username]}.  Thank you for coming by."
     redirect to "/"
+  else
+    session[:message] = "That is not a valid Username/Password pair.  Please try again."
+    redirect to("/login")
   end
 end
 
 get "/signup" do
-  params[:type] = "person"
-  @reqs = get_requirements(params[:type])
+  params["type"] = "person"
+  @reqs = OBJECT_FACTORY.create_new_object(params).requirements
   erb :"user/signup"
 end
 
 post "/attend/:type" do
-  query_string = request.query_string
   @person = Person.search_for("username", session[:username])[0]
-  @person.send("attend_#{params[:type]}".to_sym, params[:id])
-  session[:message] = "You are now attending the #{params[:type].capitalize}.  Thank you!"
+  success = @person.send("attend_#{params[:type]}".to_sym, params[:id])
+  if success
+    session[:message] = "You are now attending the #{params[:type].capitalize}.  Thank you!"
+  else
+    session[:message] = "You are already attending the #{params[:type].capitalize}."
+  end
   redirect to("/")
 end

@@ -10,7 +10,14 @@ class Person
   end
   
   def attend_convention(id)
-    DATABASE.execute("INSERT INTO conventions_people (convention_id, person_id) VALUES (#{id}, #{self.id})")
+    begin
+      run = DATABASE.execute("INSERT INTO conventions_people (convention_id, person_id) VALUES (#{id}, #{self.id})")
+      if run
+        true
+      end
+    rescue
+      false
+    end
   end
   
   def attend_panel(id)
@@ -31,6 +38,20 @@ class Person
   
   def self.get_username(id)
     username = DATABASE.execute("SELECT username FROM people WHERE id = #{id}")
+  end
+  
+  def self.validated?(options)
+    begin
+      validator = Person.search_for("username", options[:username])[0]  
+      validator.password = BCrypt::Password.new(validator.password)
+      if validator.password == options[:password]
+        true
+      else
+        false
+      end
+    rescue
+      false
+    end
   end
   
 end
