@@ -9,12 +9,15 @@ body {
 }
 
 nav {
+  background: gray;
   padding: 10px 0px;
-  background: black;
   color: white;
   position: fixed;
   width: 100%;
-  
+}
+
+.show-menu{
+  color: black;
 }
 
 #hidden {
@@ -25,13 +28,17 @@ nav ul {
   list-style-type: none;
   display: block;
   width: 100%;
-  background: black;
+  background: gray;
   color: white;
   text-align: center;
-  margin: 0px;
+  margin: 2px 0;
   padding: 2px;
 }
 
+ul li {
+  margin: 3px 0;
+  background: black;
+}
 ul li a {
   display: block;
 }
@@ -46,6 +53,7 @@ ul li ul {
 
 ul li ul li {
   padding: 2px;
+  margin: 2px 20px;
 }
 
 /*ul li:hover ul {
@@ -63,7 +71,7 @@ label.show-hidden {
 }
 
 input#show-username {
-  display: none;
+  display: hidden;
 }
 
 label.show-username {
